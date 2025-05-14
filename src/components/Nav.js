@@ -15,7 +15,9 @@ function Nav() {
           <li>
             <Link to="/courses">카탈로그</Link>
           </li>
-          <li>커뮤니티</li>
+          <li>
+            <Link to="/questions">커뮤니티</Link>
+          </li>
           <li>
             <UserMenu />
           </li>
