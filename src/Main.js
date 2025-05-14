@@ -15,11 +15,13 @@ function Main() {
           <Route index element={<HomePage />} />
           <Route path="courses">
             <Route index element={<CourseListPage />} />
-            <Route path="react-frontend-development" element={<CoursePage />} />
+            <Route path=":courseSlug" element={<CoursePage />} />
           </Route>
           <Route path="wishlist" element={<WishListPage />} />
-          <Route path="questions" element={<QuestionListPage />} />
-          <Route path="questions/616825" element={<QuestionPage />} />
+          <Route path="questions">
+            <Route index element={<QuestionListPage />} />
+            <Route path=":questionId" element={<QuestionPage />} />
+          </Route>
         </Route>
       </Routes>
     </BrowserRouter>
