@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom";
+import { useParams, Navigate } from "react-router-dom";
 import classNames from "classnames";
 import { getQuestionById } from "../api";
 import Avatar from "../components/Avatar";
@@ -12,6 +12,8 @@ import styles from "./QuestionPage.module.css";
 function QuestionPage() {
   const { questionId } = useParams();
   const question = getQuestionById(questionId);
+
+  if (!question) return <Navigate to="/questions" />;
 
   return (
     <>

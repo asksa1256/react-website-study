@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useSearchParams } from "react-router-dom";
 import { getQuestions } from "../api";
 import DateText from "../components/DateText";
 import ListPage from "../components/ListPage";
@@ -35,10 +35,24 @@ function QuestionItem({ question }) {
 }
 
 function QuestionListPage() {
-  const [keyword, setKeyword] = useState("");
-  const questions = getQuestions();
+  const [searchParams, setSearchParams] = useSearchParams();
+  const initKeyword = searchParams.get("keyword");
+  const [keyword, setKeyword] = useState(initKeyword);
+  const questions = getQuestions(initKeyword);
 
   const handleKeywordChange = (e) => setKeyword(e.target.value);
+
+  const handleSubmit = (e) => {
+    // 기본 폼 동작 막고, setSearchParams를 통해 페이지를 새로고침하지 않고 URL과 상태를 갱신 (for UX)
+    e.preventDefault();
+    setSearchParams(
+      keyword
+        ? {
+            keyword,
+          }
+        : {}
+    );
+  };
 
   return (
     <ListPage
@@ -46,7 +60,7 @@ function QuestionListPage() {
       title="커뮤니티"
       description="코드댓의 2만 수강생들과 함께 공부해봐요."
     >
-      <form className={searchBarStyles.form}>
+      <form className={searchBarStyles.form} onSubmit={handleSubmit}>
         <input
           name="keyword"
           value={keyword}
