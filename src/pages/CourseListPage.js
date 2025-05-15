@@ -1,3 +1,4 @@
+import { Helmet } from "react-helmet";
 import { useState } from "react";
 import ListPage from "../components/ListPage";
 import Warn from "../components/Warn";
@@ -35,6 +36,9 @@ function CourseListPage() {
       title="모든 코스"
       description="자체 제작된 코스들로 기초를 쌓으세요."
     >
+      <Helmet>
+        <title>Codethat - 모든 코스</title>
+      </Helmet>
       <form className={searchBarStyles.form} onSubmit={handleSubmit}>
         <input
           name="keyword"
