@@ -37,13 +37,14 @@ function QuestionItem({ question }) {
 function QuestionListPage() {
   const [searchParams, setSearchParams] = useSearchParams();
   const initKeyword = searchParams.get("keyword");
-  const [keyword, setKeyword] = useState(initKeyword);
+  const [keyword, setKeyword] = useState(initKeyword || "");
   const questions = getQuestions(initKeyword);
 
   const handleKeywordChange = (e) => setKeyword(e.target.value);
 
   const handleSubmit = (e) => {
     // 기본 폼 동작 막고, setSearchParams를 통해 페이지를 새로고침하지 않고 URL과 상태를 갱신 (for UX)
+    // 예를 들어, setSearchParams({ keyword: 'react' }); 이렇게 하면 주소창 쿼리 값이 '?keyword=react'로 바뀜
     e.preventDefault();
     setSearchParams(
       keyword
